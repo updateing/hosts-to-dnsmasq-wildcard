@@ -12,19 +12,22 @@ import string
 
 # TODO: use address to collect domains - that makes more sense
 def findTopDomain(domain_name):
+    # Common country codes used in Google hosts
     countryName = ["cn", "sg", "jp", "hk", "uk", "ca", "ru", "kr", "gr", "bg", "cy", \
         "fi", "co", "au", "vi", "mn", "mm", "bn", "bz", "py", "ai", "ph", "pk", "pe", \
         "pg", "ar", "tj", "na", "ng", "nf", "fj", "np", "ni", "qa", "jm", "cu", "kw", \
         "kh", "sv", "af", "sl", "ag", "sa", "sb", "pr", "ly", "tr", "tw", "lb", "et", \
         "ec", "eg", "mx", "my", "mt", "uy", "br", "pa", "bd", "bo", "bh", "vn", "vc", \
         "ua", "gt", "om", "gh", "gi", "do", "th", "ma", "mz", "ug", "ke", "ls", "nz", \
-        "zm", "za", "zw", "ve", "in", "il", "id", "ao", "uz", "ck", "cr", "bw", "tz"] # Common country codes used in Google hosts
+        "zm", "za", "zw", "ve", "in", "il", "id", "ao", "uz", "ck", "cr", "bw", "tz"]
     topDomains = ["com", "org", "net", "co"]
-    domainElem = domain_name.split(".")
-    if len(domainElem) < 4 and len(domainElem[0]) < 7: # enough to filter out "cdn-www.xda-developers.com" and "r12-xxxxxxx.googlevideo.com"
-        return domain_name # TODO make it parameter (minimum parts to be truncated)
 
-    realDomainAt = 0
+    domainElem = domain_name.split(".")
+    if len(domainElem) < 4 and len(domainElem[0]) < 7:
+        # enough to filter out "cdn-www.xda-developers.com" and "r12-xxxxxxx.googlevideo.com"
+        return domain_name
+    # TODO make these become parameters (minimum parts to be truncated and max length)
+
     if domainElem[-1] not in countryName: # *.com
         return string.join(domainElem[-2:], ".")
     else:
