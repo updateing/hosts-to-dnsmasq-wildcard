@@ -31,3 +31,17 @@ If `OutputDnsmasqConfFile` does not exist, it will be created.
 If it exists, it will be **overwritten**.
 
 Example: `host-to-dnsmasq.py /etc/hosts dnsmasq-append.conf`
+
+# ATTENETION
+If you have such lines in your hosts
+```
+192.168.2.2 cdn1.domain.com
+192.168.2.2 cdn2.domain.com
+```
+This will be converted to
+```
+address=/domain.com/192.168.2.2
+```
+which may lead **www.domain.com** to be resolved as 192.168.2.2
+
+If www.domain.com doesn't use the same IP address as its CDN nodes, www.domain.com will be inaccessible!
